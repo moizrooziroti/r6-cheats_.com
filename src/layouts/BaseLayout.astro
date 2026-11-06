@@ -14,6 +14,7 @@ import {
 } from '../config/seo';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import InstantBuy from '../components/InstantBuy.astro';
 import JsonLd from '../components/JsonLd.astro';
 
 interface Props {
@@ -144,6 +145,7 @@ const robotsContent = noindex
       <slot />
     </main>
     <Footer />
+    <InstantBuy />
     <script>
       import '../scripts/site.ts';
     </script>

@@ -117,70 +117,98 @@ function thread(input: ForumThreadInput): Omit<ForumPost, 'coverImage'> {
   };
 }
 
-const fillBodies: Record<string, string[]> = {
-  'Cheats & overlays': [
-    'Same boat — I grabbed the cheats listing from this hub. Menu is busy at first; I screenshot defaults before I touch anything.',
-    'For ranked I literally change one thing then play three THunt rounds. If it still feels off it’s usually crosshair height not “the cheat.”',
-    'Anyone know if the seller notes the max game build on the checkout? I hate patching then learning I’m on my own for a day.',
-    'I run lower smoothing than most clips look — boring but my aim still looks like me on a VOD.',
-    'Packet loss day = no slider fixes your duel. Check the connection icon first.',
-  ],
-  General: [
-    'Not flexing but I’ve nuked a config folder twice by rushing. Backup the whole loader directory.',
-    'I use the /products/ page as my single bookmark so I’m not clicking random rep links in DMs.',
-    'If refund language is fuzzy I just don’t buy — saved me drama twice.',
-  ],
-  Hardware: [
-    'BIOS stuff varies by board — write down every toggle before you flip it.',
-    'Clean Windows helps driver drama sometimes; other times it’s just 20 wasted hours.',
-    'Spoofer scope is on the listing — I don’t expect miracles outside what it says.',
-  ],
-  Recovery: [
-    'I name files 2025-11-07_notice.png etc. Sounds nerdy until support asks for “that email from Tuesday.”',
-    'Zip bombs are real — folder + share link beats dumping 40 screenshots inline.',
-  ],
-  DMA: [
-    'Measure ping to the host if the panel shows it — guessing latency is how people rage-quit DMA.',
-    'Cable labels on both ends. Future you sends a thank-you note.',
-    'Secure Boot steps never match YouTube exactly — photo every screen.',
-  ],
-};
-
 function mapCommentAuthor(slug: string, c: ForumComment, index: number): ForumComment {
   if (c.author === TEAM) return c;
   return { ...c, author: memberName(slug, `${index}:${c.body.slice(0, 24)}`) };
 }
 
-function padComments(slug: string, category: ForumPost['category'], comments: ForumComment[]): ForumComment[] {
+function padComments(slug: string, title: string, comments: ForumComment[]): ForumComment[] {
   const mapped = comments.map((c, i) => mapCommentAuthor(slug, c, i));
   const want = targetReplyCount(slug);
-  const pool = fillBodies[category] ?? fillBodies.General;
   let k = mapped.length;
   const out = [...mapped];
   while (out.length < want) {
-    const body = pool[(hashSlug(`${slug}:fill:${k}`) % pool.length) ?? 0]!;
     const score = 1 + (hashSlug(`${slug}:sc:${k}`) % 12);
     out.push({
       author: memberName(slug, `fill${k}`),
       age: ageFor(slug, k + 3),
       score,
-      body,
+      body: nextUniqueReply(title),
     });
     k++;
   }
   return out.slice(0, want);
 }
 
-function rewriteOpBody(slug: string, category: ForumPost['category'], body: string[]): string[] {
-  const opener: Record<string, string> = {
-    'Cheats & overlays': `Bought through the Rainbow Six Siege cheats page on this site (OP: ${opName(slug)}). Not chasing “god settings” threads — just stuff that runs stable after patches.`,
-    General: 'Quick thread — trying to keep my setup boring and documented. Third-party tools are messy enough.',
-    Hardware: 'PC / BIOS / driver question — I’ll follow whatever the product page actually says, not Discord mythology.',
-    Recovery: 'Account paperwork thread — organizing proof before I send anything official.',
-    DMA: 'DMA / second box setup — cost and cables are real, trying not to fantasize about zero latency.',
+const UNIQUE_REPLIES = [
+  'I checked the cheats card on r6-cheats.com before answering — the menu names there are the ones I use.',
+  'Spoofer page is a different buy from the overlay. I almost mixed those two up last month.',
+  'UGC is paperwork. It will not draw boxes or move your crosshair.',
+  'Cloud DMA on this site is the hardware path. Do not expect a one-click loader.',
+  'After the last Siege update I waited for the seller note instead of reinstalling.',
+  'My FOV sits near 8. Wider than that and close fights feel sticky on my pad.',
+  'Smoothing around the middle is the only preset that still looks like my own mouse.',
+  'I turned teammate outlines off in solo. Stack nights I turn them back on.',
+  'Gadget ESP only. Footsteps stay in the headset.',
+  'Thick wall lines on basement sites, thin lines when the map is bright.',
+  'Crosshair at head height first. The aim module is useless if I am aiming at the floor.',
+  'Packet loss icon was red. No slider was going to fix that duel.',
+  'I log vanilla FPS, then ESP, then aim. Otherwise I blame the wrong thing.',
+  'Borderless fixed the overlay that fullscreen kept hiding.',
+  'Loader and game both elevated, matching the note on the listing.',
+  'I keep the order email and the build number in one folder named r6-cheats.',
+  'Refund text is on the partner checkout, not on our article.',
+  'Buy opened a new tab. Payment never hits r6-cheats.com.',
+  'Motherboard swap changed more IDs than I expected. I read the spoofer listing before touching it.',
+  'Fresh Windows only when Device Manager was already a mess.',
+  'Appeal files are dated YYYY-MM-DD so I can sort them.',
+  'I crop payment tokens out of UGC screenshots.',
+  'DMA cables are labeled on both ends. Saved me an hour last firmware swap.',
+  'Host region is the one next to my ISP, not a random VPN exit.',
+  'Secure Boot steps on my board did not match a generic video.',
+  'I photograph BIOS screens before I change anything.',
+  'Shared loader logins are how keys leak. Mine stays on my email.',
+  'Patch night I play vanilla until the cheats listing says the build is current.',
+  'THunt for three rounds, one slider, three more rounds. Slow but I know what changed.',
+  'Two profiles: stack and solo. Names are on the export.',
+  'Recoil smoothing on the LMG is not the SMG preset. I stopped sharing them.',
+  'Wide aim cone kept picking the wrong player on site executes.',
+  'VOD looked snappy because smoothing was near zero. I raised it.',
+  'Drone ESP did not replace actually droning the rotate.',
+  'If sound and the overlay disagree I slow down instead of dry peeking.',
+  'Ranked nerves went up, so I shortened sessions instead of maxing assist.',
+  'Weekend play does not pay back DMA hardware for me. Software cheats page was enough.',
+  'Streaming encoder hurt FPS more than the box ESP.',
+  'I bookmark /products/ so I am not clicking old chat links.',
+  'Glossary article stopped me buying “wallhack” twice under two names.',
+  'Distance cap on ESP cleaned Coastline. I had every label on.',
+  'Bone priority on head only inside a short range. Chest beyond that.',
+  'Second aim key is Alt. RMB stays my normal aim.',
+  'Visible check on, draw FOV off, so I am not staring at a circle.',
+  'Config backup before experiments. I have deleted a good profile once.',
+  'Support wants the loader version, not a novel.',
+  'This site’s four cards are the only buys I use: cheats, spoofer, UGC, DMA.',
+  'I do not treat forum replies as the feature list. Checkout text wins.',
+];
+
+let replyCursor = 0;
+
+function nextUniqueReply(title: string): string {
+  const line = UNIQUE_REPLIES[replyCursor % UNIQUE_REPLIES.length]!;
+  replyCursor += 1;
+  return `${line} Thread: “${title}”.`;
+}
+
+function rewriteOpBody(slug: string, title: string, category: ForumPost['category'], body: string[]): string[] {
+  const who = opName(slug);
+  const lead: Record<string, string> = {
+    'Cheats & overlays': `${who} — question about the Rainbow Six Siege cheats listing on r6-cheats.com (“${title}”).`,
+    General: `${who} — site question on r6-cheats.com (“${title}”), not a clip from another shop.`,
+    Hardware: `${who} — hardware note tied to the spoofer card on r6-cheats.com (“${title}”).`,
+    Recovery: `${who} — UGC paperwork thread on r6-cheats.com (“${title}”).`,
+    DMA: `${who} — Cloud DMA thread on r6-cheats.com (“${title}”).`,
   };
-  const lead = opener[category] ?? opener.General!;
-  return [lead, ...body];
+  return [lead[category] ?? lead.General!, ...body];
 }
 
 function humanizeThread(raw: ForumThreadInput): ForumThreadInput {
@@ -188,8 +216,8 @@ function humanizeThread(raw: ForumThreadInput): ForumThreadInput {
   return {
     ...raw,
     author: op,
-    body: rewriteOpBody(raw.slug, raw.category, raw.body),
-    comments: padComments(raw.slug, raw.category, raw.comments),
+    body: rewriteOpBody(raw.slug, raw.title, raw.category, raw.body),
+    comments: padComments(raw.slug, raw.title, raw.comments),
   };
 }
 

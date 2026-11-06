@@ -45,28 +45,13 @@ const communitySlug = (category: string) => `r6/${category.toLowerCase().replace
   <section class="forum-page py-8 md:py-12">
     <div class="mx-auto max-w-6xl px-5">
       <Breadcrumbs items={breadcrumbs} />
-      <figure class="forum-hero-media forum-hero-media--capture mb-8 overflow-hidden rounded-xl border border-border bg-zinc-950 shadow-lg ring-1 ring-white/10">
-        <img
-          src="/new-assets/r6-forums-hero-menu.png"
-          alt="Example in-game style menu: Visuals, Aimbot, Misc — illustrative UI only, not a guarantee of any product"
-          width={1520}
-          height={856}
-          loading="eager"
-          fetchpriority="high"
-          class="aspect-video w-full object-cover object-top"
-        />
-        <figcaption class="px-4 py-3 text-center text-[11px] leading-snug text-muted-foreground md:text-xs">
-          Illustrative menu layout — real features and labels depend on the checkout listing you open from our{' '}
-          <a href="/products/" class="font-semibold text-primary underline-offset-2 hover:underline">products</a> page.
-        </figcaption>
-      </figure>
       <header class="forum-hero">
         <div>
           <p class="section-header__eyebrow">Rainbow Six Siege</p>
           <h1>R6 cheats forums</h1>
           <p class="forum-hero__copy">
-            Discussion about Rainbow Six Siege tools we link to — configs, loaders, spoofer, UGC, DMA. Threads are written for
-            this site (not live user accounts); treat replies as opinions, then confirm on the product page.
+            Threads on r6-cheats.com about the four offers we actually sell: Siege cheats, the HWID spoofer, UGC recovery, and
+            Cloud DMA. Read a thread, then open the matching product page before you pay.
           </p>
         </div>
         <a class="forum-create" href={ROUTES.articles}
@@ -128,7 +113,7 @@ const communitySlug = (category: string) => `r6/${category.toLowerCase().replace
                   <a href={forumThreadPath(post.slug)} aria-hidden="true" tabindex={-1} class="forum-post-thumb__link">
                     <ResponsiveImage
                       src={post.coverImage}
-                      alt=""
+                      alt={post.title}
                       width={220}
                       height={124}
                       loading="lazy"

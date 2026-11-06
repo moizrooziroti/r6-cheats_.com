@@ -86,16 +86,8 @@ export const productRelatedBlogSlugs: Record<string, string[]> = {
 
 const productBase = '/products/';
 
-const ph = '/new-assets/hero-placeholder.svg';
-
 /** Product galleries: primary SITE_WEBP stills plus a second Supabase still from EXTRA_WEBP (see siteMedia). */
 const IMG = SITE_WEBP;
-
-const sharedLimitations =
-  'Third-party tools may violate Rainbow Six Siege terms of service and can lead to account restrictions or loss of access. We do not claim any specific detection status. Use is at your own risk. Compatibility and availability can change after game or platform updates.';
-
-const sharedGoodToKnow =
-  'Read current product notes on the checkout page before purchase. Behavior can change when the game or platform updates. Start with conservative settings and verify overlay behavior in a controlled environment before regular play.';
 
 const siegeSystemRequirements: SystemRequirement[] = [
   { icon: 'reqWindows', text: '64-bit Windows 10 or 11 (exact minimum build: confirm with checkout listing).' },
@@ -172,13 +164,15 @@ export const productPages: ProductPage[] = [
     overview: {
       title: 'What this bundle is for',
       paragraphs: [
-        'This page is for players comparing Rainbow Six Siege cheats with ESP, aimbot-style assistance, and wallhack-style emphasis. Copy here explains categories of tools — the authoritative feature list stays on the checkout page you open with Buy.',
-        'We do not promise outcomes or stealth. Treat every module as high-risk to your account and adjust expectations when the game updates.',
+        'Buy Rainbow Six Siege cheats here when you want ESP, aim assistance, and wallhack-style visuals in one menu. Hit Buy and the partner checkout lists the live modules, price, and delivery.',
+        'Account risk is real and we do not claim a detection status. The point of this page is a clear path to the cheats, the spoofer, UGC, or Cloud DMA — not a copied feature list from another brand.',
       ],
     },
     acquisition: acquisitionDefault('Siege cheats'),
-    goodToKnow: sharedGoodToKnow,
-    limitations: sharedLimitations,
+    goodToKnow:
+      'On the cheats page, start with one profile. Confirm ESP, aim, and wallhack names on checkout before you treat a forum screenshot as the menu.',
+    limitations:
+      'The Rainbow Six Siege cheats offer on r6-cheats.com can conflict with the game rules and can cost the account. We do not state a detection status. Modules can change after a Siege update — checkout is the current list.',
     fullFeatures: [
       'ESP-style enemy and gadget readouts (per listing)',
       'Aim smoothing / FOV-style controls where offered',
@@ -249,8 +243,10 @@ export const productPages: ProductPage[] = [
       ],
     },
     acquisition: acquisitionDefault('HWID spoofer'),
-    goodToKnow: sharedGoodToKnow,
-    limitations: `${sharedLimitations} Spoofing does not replace account-level outcomes; policies are set by the platform.`,
+    goodToKnow:
+      'The spoofer card is only for hardware-identifier scope written on its own listing. It is not the cheats menu and it is not an appeal.',
+    limitations:
+      'An HWID spoofer on r6-cheats.com does not restore a Rainbow Six Siege account and does not add ESP. Platform rules still apply. Coverage is whatever that checkout page lists for Windows and reboot steps.',
     fullFeatures: [
       'Configurable identifier targets as listed',
       'Reboot or verification steps from documentation',
@@ -305,10 +301,11 @@ export const productPages: ProductPage[] = [
       ],
     },
     acquisition: acquisitionDefault('UGC'),
-    goodToKnow: sharedGoodToKnow,
-    limitations: sharedLimitations,
+    goodToKnow:
+      'UGC on this site is a documentation workflow. Keep originals of screenshots and do not expect the tool to decide the appeal.',
+    limitations:
+      'UGC Account Recovery on r6-cheats.com organizes a case. Ubisoft or the platform decides the outcome. This product is not a cheat overlay and not a hardware spoofer.',
     fullFeatures: [
-      'Structured appeal or recovery workflow (per listing)',
       'Document attachments or notes if supported',
       'Status visibility when the product includes it',
     ],
@@ -361,8 +358,10 @@ export const productPages: ProductPage[] = [
       ],
     },
     acquisition: acquisitionDefault('Cloud DMA'),
-    goodToKnow: sharedGoodToKnow,
-    limitations: `${sharedLimitations} DMA products have additional hardware prerequisites; confirm them on checkout.`,
+    goodToKnow:
+      'Cloud DMA is the only hardware-path offer here. Read the bridge and second-PC notes on its listing before comparing it to the software cheats card.',
+    limitations:
+      'Cloud DMA on r6-cheats.com needs the gear the listing names. It is a different buy from the on-PC cheats loader. Account risk and patch breakage still exist; we do not claim a detection status.',
     fullFeatures: [
       'Hardware bridge requirements as listed',
       'Cloud or remote processing notes from documentation',

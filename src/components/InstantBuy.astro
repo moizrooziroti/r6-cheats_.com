@@ -1,0 +1,159 @@
+---
+import { PRIMARY_BUY_URL } from '../config/checkout';
+---
+
+<div class="instant-buy" data-instant-buy hidden>
+  <button type="button" class="instant-buy__tab" data-instant-buy-open aria-expanded="false">
+    Buy cheats
+  </button>
+  <aside class="instant-buy__panel" data-instant-buy-panel role="dialog" aria-label="Buy Rainbow Six Siege cheats" hidden>
+    <button type="button" class="instant-buy__close" data-instant-buy-close aria-label="Close buy offer">
+      ×
+    </button>
+    <p class="instant-buy__kicker">r6-cheats.com</p>
+    <p class="instant-buy__line">Siege cheats. One tap. ESP, aim assist, and wallhack-style tools are waiting at checkout.</p>
+    <a
+      class="instant-buy__cta"
+      href={PRIMARY_BUY_URL}
+      target="_blank"
+      rel="sponsored noopener noreferrer"
+    >
+      Buy now
+    </a>
+  </aside>
+</div>
+
+<script>
+  const root = document.querySelector('[data-instant-buy]');
+  const panel = document.querySelector('[data-instant-buy-panel]');
+  const tab = document.querySelector('[data-instant-buy-open]');
+  const closeBtn = document.querySelector('[data-instant-buy-close]');
+  if (root && panel && tab && closeBtn) {
+    const key = 'r6-instant-buy-closed';
+    const open = () => {
+      panel.hidden = false;
+      tab.setAttribute('aria-expanded', 'true');
+      root.classList.add('is-open');
+    };
+    const close = () => {
+      panel.hidden = true;
+      tab.setAttribute('aria-expanded', 'false');
+      root.classList.remove('is-open');
+      try {
+        sessionStorage.setItem(key, '1');
+      } catch {
+        /* ignore */
+      }
+    };
+    root.hidden = false;
+    tab.addEventListener('click', () => {
+      if (panel.hidden) open();
+      else close();
+    });
+    closeBtn.addEventListener('click', close);
+    let closed = false;
+    try {
+      closed = sessionStorage.getItem(key) === '1';
+    } catch {
+      closed = false;
+    }
+    if (!closed) {
+      window.setTimeout(open, 600);
+    }
+  }
+</script>
+
+<style>
+  .instant-buy {
+    position: fixed;
+    z-index: 70;
+    right: 0;
+    bottom: 1.25rem;
+    display: flex;
+    align-items: flex-end;
+    gap: 0.5rem;
+    max-width: calc(100vw - 1rem);
+    pointer-events: none;
+  }
+  .instant-buy__tab,
+  .instant-buy__panel,
+  .instant-buy__cta,
+  .instant-buy__close {
+    pointer-events: auto;
+  }
+  .instant-buy__tab {
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    border: 1px solid color-mix(in oklch, var(--primary) 55%, var(--border));
+    border-right: 0;
+    border-radius: 0.7rem 0 0 0.7rem;
+    background: var(--primary);
+    color: white;
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    padding: 0.85rem 0.45rem;
+    box-shadow: 0 10px 30px color-mix(in oklch, black 35%, transparent);
+  }
+  .instant-buy__panel {
+    position: relative;
+    width: min(18.5rem, calc(100vw - 3.2rem));
+    margin-bottom: 0.15rem;
+    border: 1px solid var(--border);
+    border-radius: 1rem;
+    background: color-mix(in oklch, var(--card) 94%, black);
+    padding: 1rem 2rem 0.9rem 1rem;
+    box-shadow: 0 18px 50px color-mix(in oklch, black 45%, transparent);
+  }
+  .instant-buy__panel[hidden] {
+    display: none;
+  }
+  .instant-buy__close {
+    position: absolute;
+    top: 0.55rem;
+    right: 0.55rem;
+    width: 1.7rem;
+    height: 1.7rem;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: var(--background);
+    color: var(--foreground);
+    font-size: 1.05rem;
+    line-height: 1;
+  }
+  .instant-buy__kicker {
+    margin: 0;
+    color: var(--primary);
+    font-size: 0.68rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .instant-buy__line {
+    margin: 0.45rem 0 0.8rem;
+    color: var(--foreground);
+    font-size: 0.92rem;
+    font-weight: 700;
+    line-height: 1.35;
+  }
+  .instant-buy__cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    border-radius: 0.75rem;
+    background: var(--primary);
+    color: white;
+    font-size: 0.84rem;
+    font-weight: 800;
+    padding: 0.7rem 0.9rem;
+  }
+  .instant-buy__cta:hover {
+    filter: brightness(1.08);
+  }
+  @media (max-width: 520px) {
+    .instant-buy {
+      bottom: 0.75rem;
+    }
+  }
+</style>

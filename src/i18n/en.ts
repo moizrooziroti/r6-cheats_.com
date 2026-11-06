@@ -34,13 +34,13 @@ export const en: Translations = {
   ],
   hero: {
     status: 'PC · Rainbow Six Siege',
-    eyebrow: 'Resource site',
+    eyebrow: 'Buy Rainbow Six Siege cheats',
     titleLine1: 'Rainbow Six Siege',
-    titleLine2: 'Cheats & tools',
+    titleLine2: 'Cheats — buy now',
     subtitle:
-      'Compare four affiliate offers—Rainbow Six Siege cheats (ESP, aimbot-style assist, wallhack-style visibility), HWID spoofer, UGC account recovery, and Cloud DMA. Read articles and forums first; Buy opens checkout in a new tab.',
-    ctaPrimary: 'Browse products',
-    ctaDiscord: 'Buy cheats',
+      'Get the r6-cheats.com Siege bundle: ESP, aim assistance, and wallhack-style visuals, plus an HWID spoofer, UGC recovery, and Cloud DMA. Hit Buy and checkout opens in a new tab.',
+    ctaPrimary: 'See all cheats',
+    ctaDiscord: 'Buy cheats now',
     modesLabel: 'Focus areas',
     modes: ['ESP', 'Aim assist', 'Wallhack-style', 'HWID · UGC · DMA'],
     metrics: [
@@ -52,9 +52,9 @@ export const en: Translations = {
   },
   features: {
     eyebrow: 'What we cover',
-    title: 'Four ways buyers talk about Siege tools',
+    title: 'What you get with Rainbow Six Siege cheats',
     subtitle:
-      'Short, neutral descriptions—you’ll match them to vendor listings at checkout. We don’t claim stealth or outcomes.',
+      'ESP, aim assistance, and wallhack-style visuals are the core buy. Spoofer, UGC, and Cloud DMA sit beside them if you need that extra piece.',
     items: [
       {
         title: 'ESP & intel',
@@ -133,9 +133,9 @@ export const en: Translations = {
   },
   whyUs: {
     eyebrow: 'Why read here first',
-    title: 'Editorial framing, not vendor hype',
+    title: 'Why r6-cheats.com is the page to read first',
     subtitle:
-      'We publish checklists and tradeoffs so you know what to verify on the checkout page. Third-party tools may breach game terms — account risk stays with you.',
+      'Four Siege products, each with a Buy button that opens the matching checkout. Read the page, then buy the cheats, the spoofer, UGC, or Cloud DMA without hunting a random shop.',
     usLabel: 'This site',
     otherLabel: 'Typical hype',
     rows: [
@@ -153,7 +153,7 @@ export const en: Translations = {
       },
       {
         title: 'Articles + forums',
-        desc: 'Long-form explainers and text-only Q&A threads you can search.',
+        desc: 'Fifteen Siege guides plus forum threads that point back to one of the four products.',
       },
       {
         title: 'Honest limitations',
@@ -167,15 +167,15 @@ export const en: Translations = {
     metrics: [
       { value: '15', title: 'Articles', desc: 'Guides, glossaries, and checklists.' },
       { value: '36', title: 'Forum threads', desc: 'Reader questions and team answers.' },
-      { value: '4', title: 'Products', desc: 'Same price until you supply a number.' },
+      { value: '4', title: 'Products', desc: 'Cheats, spoofer, UGC recovery, Cloud DMA.' },
     ],
   },
   setup: {
     eyebrow: 'Flow',
-    titleLead: 'From skimming articles to checking out in',
-    titleHighlight: 'three calm steps',
+    titleLead: 'Pick the cheat, open checkout in',
+    titleHighlight: 'three steps',
     intro:
-      'Read, compare the four cards, then open Buy only when checkout language matches what you need.',
+      'Choose ESP, aim assist, or wallhack-style cheats — or the spoofer, UGC, or Cloud DMA — then hit Buy. The partner page is the live price and feature list.',
     ctaPrimary: 'View products',
     ctaSecondary: 'Read FAQ',
     ctaPrimaryHref: productBase,
@@ -227,7 +227,7 @@ export const en: Translations = {
     eyebrow: 'Products',
     title: 'Four Rainbow Six Siege offers',
     subtitle:
-      'Same checkout price placeholder (see pricing note on cards) — swap in your amount in docs/missing-info.md.',
+      'Cheats, HWID spoofer, UGC recovery, and Cloud DMA — each card on r6-cheats.com opens its own page, then Buy goes to checkout.',
     viewAll: 'View catalog',
     get: 'Get',
     explore: 'Explore',
@@ -349,7 +349,7 @@ export const en: Translations = {
       {
         num: '03',
         title: 'Forum tone',
-        desc: 'Threads are editorial Q&A — not verified customer claims.',
+        desc: 'Forum posts on this domain discuss our four Siege offers. They are not live Ubisoft tickets.',
       },
     ],
   },
@@ -357,7 +357,7 @@ export const en: Translations = {
     eyebrow: 'Help',
     title: 'Support & resources',
     subtitle:
-      'Checkout handles purchases. We provide FAQ, articles, and forums on this domain.',
+      'Orders are finished on the partner checkout. r6-cheats.com support only covers this website: the four product pages, articles, and forums.',
     channels: [
       {
         icon: 'navProducts',
@@ -413,7 +413,7 @@ export const en: Translations = {
       'Short quotes when we have permission to publish them. No aggregate rating until real reviews exist in data/reviews.json.',
     emptyTitle: 'No published reviews yet',
     emptyBody:
-      'When you supply entries for data/reviews.json, they will appear here with pagination. We do not show review schema until content is visible.',
+      'r6-cheats.com does not invent star ratings. This block stays empty until a real checkout note is added to the reviews file.',
   },
   footer: {
     tagline: 'Rainbow Six Siege cheats — ESP, aim assist, wallhack-style, HWID, UGC, DMA. Affiliate links.',
@@ -470,7 +470,7 @@ export const en: Translations = {
         {
           heading: 'What we publish',
           paragraphs: [
-            'r6-cheats.com summarizes product categories (cheats, HWID spoofer, UGC recovery, Cloud DMA), publishes articles, and hosts text-only forum Q&A. We are not the game publisher.',
+            'r6-cheats.com is an independent Rainbow Six Siege catalog: one cheats offer, one HWID spoofer, one UGC recovery tool, and one Cloud DMA offer, plus original guides and forums written for those four pages. We are not Ubisoft.',
             'Game names are used descriptively; trademarks belong to their owners.',
           ],
         },
