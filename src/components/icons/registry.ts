@@ -242,7 +242,7 @@ export const iconRegistry: Record<IconName, AstroComponent> = {
   faqWhoElite: Sparkles,
   faqPatchUpdate: RefreshCw,
   faqDiscordHelp: Headphones,
-  faqTurboRanked: Gauge,
+  faqMatchPace: Gauge,
   faqZoomHack: LocateFixed,
   faqAutoFarm: Bot,
   faqPrivateCheats: Lock,

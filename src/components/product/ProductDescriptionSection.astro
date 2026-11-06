@@ -15,6 +15,13 @@ interface Props {
 }
 
 const { overviewTitle, blocks, showToggle } = Astro.props;
+
+function inlineHtml(text: string): string {
+  return text
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/\[([^\]]+)\]\((\/[^)\s]+)\)/g, '<a href="$2">$1</a>');
+}
 ---
 
 <section
@@ -25,14 +32,16 @@ const { overviewTitle, blocks, showToggle } = Astro.props;
     <SectionHeader
       eyebrow="Overview"
       title={overviewTitle ?? 'Product description'}
-      desc="How this build fits ranked, Turbo, and patch-day workflows."
+      desc="How this Rainbow Six Siege offer fits, from the first read through checkout."
       titleId="product-description-title"
       wide
     />
 
     <div class:list={['desc-wrap product-detail__narrow mt-8', showToggle && 'collapsible']} data-desc-wrap>
       <Prose class="description-content max-w-none">
-        {blocks.map((block) => (block.type === 'h2' ? <h2>{block.text}</h2> : <p>{block.text}</p>))}
+        {blocks.map((block) =>
+          block.type === 'h2' ? <h2>{block.text}</h2> : <p set:html={inlineHtml(block.text)} />,
+        )}
       </Prose>
       {
         showToggle && (

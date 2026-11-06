@@ -137,7 +137,7 @@ export const productPages: ProductPage[] = [
     name: 'Cheats',
     title: 'RAINBOW SIX SIEGE CHEATS',
     subtitle: 'ESP, aim assistance, and wallhack-style visibility layers described in plain language — tuned for players comparing Rainbow Six Siege cheats before checkout.',
-    desc: 'Rainbow Six Siege cheats bundle for PC: information overlays (ESP), aiming assistance, and wallhack-style rendering as offered on the listing. See checkout for exact module names.',
+    desc: 'Rainbow Six Siege cheats for PC: ESP, aim assistance, and wallhack-style visuals. Buy opens the live module list.',
     features: [
       'Player and gadget ESP-style readouts (as listed at checkout)',
       'Aim assistance controls with tunable parameters',
@@ -212,7 +212,7 @@ export const productPages: ProductPage[] = [
     name: 'Spoofer',
     title: 'R6 HWID spoofer',
     subtitle: 'Hardware identifier spoofing utilities for Rainbow Six Siege players replacing machines or following strict hardware checks — scope depends on the listing.',
-    desc: 'Rainbow Six Siege spoofer / HWID tool: changes how your PC identifiers appear where the product supports it. Not a cheat module; read limitations before relying on it.',
+    desc: 'R6 HWID spoofer for Rainbow Six Siege. It changes supported PC identifiers and is not the cheats menu.',
     features: [
       'HWID or component identifier handling (as described at checkout)',
       'Driver or cleanup steps if the listing includes them',
@@ -327,7 +327,7 @@ export const productPages: ProductPage[] = [
     name: 'Cloud DMA',
     title: 'Cloud DMA',
     subtitle: 'Cloud DMA for Rainbow Six Siege — memory read at distance with separate host gear, when the listing matches that architecture.',
-    desc: 'Cloud DMA product: understand it as a different hardware and networking path from typical on-PC overlays. Exact hardware needs are on the checkout listing.',
+    desc: 'Cloud DMA for Rainbow Six Siege: a hardware read path, separate from the on-PC cheats loader.',
     features: [
       'DMA-style read path when listed',
       'Cloud-hosted or off-box processing if included',

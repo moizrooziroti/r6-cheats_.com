@@ -166,7 +166,7 @@ export type IconName =
   | 'faqWhoElite'
   | 'faqPatchUpdate'
   | 'faqDiscordHelp'
-  | 'faqTurboRanked'
+  | 'faqMatchPace'
   | 'faqZoomHack'
   | 'faqAutoFarm'
   | 'faqPrivateCheats'
