@@ -1,10 +1,11 @@
 import { t } from '../i18n';
 import { SITE_DOMAIN as INDEXNOW_HOST_NAME } from './site';
 import { getPageSeoEntry } from './pageSeo';
+import { SITE_WEBP } from './siteMedia';
 
 export const SITE_ORIGIN = `https://${t.site.domain}`;
 
-export const DEFAULT_OG_IMAGE = '/new-assets/hero-placeholder.svg';
+export const DEFAULT_OG_IMAGE = SITE_WEBP.zadeyoVisuals;
 
 export const GA_MEASUREMENT_ID = import.meta.env.PUBLIC_GA_MEASUREMENT_ID as string | undefined;
 

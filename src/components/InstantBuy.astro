@@ -2,25 +2,27 @@
 import { PRIMARY_BUY_URL } from '../config/checkout';
 ---
 
-<div class="instant-buy" data-instant-buy hidden>
-  <button type="button" class="instant-buy__tab" data-instant-buy-open aria-expanded="false">
-    Buy cheats
-  </button>
-  <aside class="instant-buy__panel" data-instant-buy-panel role="dialog" aria-label="Buy Rainbow Six Siege cheats" hidden>
-    <button type="button" class="instant-buy__close" data-instant-buy-close aria-label="Close buy offer">
-      ×
+<div class="ib" data-instant-buy hidden>
+  <aside class="ib__card" data-instant-buy-panel role="dialog" aria-label="Buy Rainbow Six Siege cheats" hidden>
+    <button type="button" class="ib__x" data-instant-buy-close aria-label="Close">
+      <svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true">
+        <path d="M1 1l10 10M11 1L1 11" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"></path>
+      </svg>
     </button>
-    <p class="instant-buy__kicker">r6-cheats.com</p>
-    <p class="instant-buy__line">Siege cheats. One tap. ESP, aim assist, and wallhack-style tools are waiting at checkout.</p>
-    <a
-      class="instant-buy__cta"
-      href={PRIMARY_BUY_URL}
-      target="_blank"
-      rel="sponsored noopener noreferrer"
-    >
-      Buy now
+    <p class="ib__line">Don't let anyone kill you.</p>
+    <a class="ib__btn" href={PRIMARY_BUY_URL} target="_blank" rel="sponsored noopener noreferrer">
+      Buy cheats
+      <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true">
+        <path d="M3 8h10M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"></path>
+      </svg>
     </a>
   </aside>
+  <button type="button" class="ib__tab" data-instant-buy-open aria-expanded="false">
+    Buy cheats
+    <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true">
+      <path d="M3 8h10M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"></path>
+    </svg>
+  </button>
 </div>
 
 <script>
@@ -46,10 +48,7 @@ import { PRIMARY_BUY_URL } from '../config/checkout';
       }
     };
     root.hidden = false;
-    tab.addEventListener('click', () => {
-      if (panel.hidden) open();
-      else close();
-    });
+    tab.addEventListener('click', open);
     closeBtn.addEventListener('click', close);
     let closed = false;
     try {
@@ -57,103 +56,123 @@ import { PRIMARY_BUY_URL } from '../config/checkout';
     } catch {
       closed = false;
     }
-    if (!closed) {
-      window.setTimeout(open, 600);
-    }
+    if (!closed) window.setTimeout(open, 400);
   }
 </script>
 
 <style>
-  .instant-buy {
+  .ib {
     position: fixed;
-    z-index: 70;
-    right: 0;
-    bottom: 1.25rem;
+    z-index: 80;
+    right: 1rem;
+    bottom: 1.15rem;
     display: flex;
-    align-items: flex-end;
-    gap: 0.5rem;
-    max-width: calc(100vw - 1rem);
+    justify-content: flex-end;
     pointer-events: none;
   }
-  .instant-buy__tab,
-  .instant-buy__panel,
-  .instant-buy__cta,
-  .instant-buy__close {
+  .ib__card,
+  .ib__tab,
+  .ib__btn,
+  .ib__x {
     pointer-events: auto;
   }
-  .instant-buy__tab {
-    writing-mode: vertical-rl;
-    transform: rotate(180deg);
-    border: 1px solid color-mix(in oklch, var(--primary) 55%, var(--border));
-    border-right: 0;
-    border-radius: 0.7rem 0 0 0.7rem;
-    background: var(--primary);
-    color: white;
-    font-size: 0.72rem;
-    font-weight: 800;
-    letter-spacing: 0.04em;
-    padding: 0.85rem 0.45rem;
-    box-shadow: 0 10px 30px color-mix(in oklch, black 35%, transparent);
-  }
-  .instant-buy__panel {
+  .ib__card {
     position: relative;
-    width: min(18.5rem, calc(100vw - 3.2rem));
-    margin-bottom: 0.15rem;
-    border: 1px solid var(--border);
-    border-radius: 1rem;
-    background: color-mix(in oklch, var(--card) 94%, black);
-    padding: 1rem 2rem 0.9rem 1rem;
-    box-shadow: 0 18px 50px color-mix(in oklch, black 45%, transparent);
+    width: 16.5rem;
+    padding: 1.15rem 1rem 1rem;
+    border: 1px solid color-mix(in oklch, var(--primary) 42%, #2a2438);
+    border-radius: 14px;
+    background:
+      linear-gradient(180deg, color-mix(in oklch, var(--primary) 16%, #14111c) 0%, #100e16 100%);
+    box-shadow:
+      0 18px 40px rgba(0, 0, 0, 0.45),
+      inset 0 1px 0 rgba(255, 255, 255, 0.06);
   }
-  .instant-buy__panel[hidden] {
+  .ib__card[hidden] {
     display: none;
   }
-  .instant-buy__close {
+  .ib.is-open .ib__tab {
+    display: none;
+  }
+  .ib__x {
     position: absolute;
     top: 0.55rem;
     right: 0.55rem;
-    width: 1.7rem;
-    height: 1.7rem;
-    border-radius: 999px;
-    border: 1px solid var(--border);
-    background: var(--background);
-    color: var(--foreground);
-    font-size: 1.05rem;
-    line-height: 1;
+    display: grid;
+    width: 1.6rem;
+    height: 1.6rem;
+    place-items: center;
+    border: 0;
+    border-radius: 8px;
+    background: transparent;
+    color: #b7b0c6;
+    cursor: pointer;
   }
-  .instant-buy__kicker {
-    margin: 0;
-    color: var(--primary);
-    font-size: 0.68rem;
-    font-weight: 800;
-    letter-spacing: 0.08em;
+  .ib__x:hover {
+    background: rgba(255, 255, 255, 0.06);
+    color: #fff;
+  }
+  .ib__line {
+    margin: 0 1.4rem 0.9rem 0;
+    color: #fff;
+    font-family: Rajdhani, sans-serif;
+    font-size: 1.55rem;
+    font-weight: 700;
+    line-height: 0.95;
+    letter-spacing: 0.01em;
     text-transform: uppercase;
   }
-  .instant-buy__line {
-    margin: 0.45rem 0 0.8rem;
-    color: var(--foreground);
+  .ib__btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.45rem;
+    height: 2.75rem;
+    border-radius: 10px;
+    background: linear-gradient(180deg, #b49bff 0%, #7c5ce8 100%);
+    color: #fff;
     font-size: 0.92rem;
-    font-weight: 700;
-    line-height: 1.35;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    box-shadow: 0 8px 18px rgba(124, 92, 232, 0.45);
+    transition: transform 0.15s ease, filter 0.15s ease;
   }
-  .instant-buy__cta {
+  .ib__btn:hover {
+    transform: translateY(-1px);
+    filter: brightness(1.06);
+  }
+  .ib__tab {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 100%;
-    border-radius: 0.75rem;
-    background: var(--primary);
-    color: white;
+    gap: 0.4rem;
+    height: 2.75rem;
+    padding: 0 1.05rem 0 1.15rem;
+    border: 0;
+    border-radius: 999px;
+    background: linear-gradient(180deg, #b49bff 0%, #7c5ce8 100%);
+    color: #fff;
     font-size: 0.84rem;
     font-weight: 800;
-    padding: 0.7rem 0.9rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    cursor: pointer;
+    box-shadow: 0 10px 24px rgba(124, 92, 232, 0.45);
   }
-  .instant-buy__cta:hover {
-    filter: brightness(1.08);
+  .ib__tab:hover {
+    filter: brightness(1.06);
   }
   @media (max-width: 520px) {
-    .instant-buy {
-      bottom: 0.75rem;
+    .ib {
+      right: 0.75rem;
+      bottom: 0.85rem;
+    }
+    .ib__card {
+      width: min(16.5rem, calc(100vw - 1.5rem));
+    }
+    .ib__line {
+      font-size: 1.4rem;
     }
   }
 </style>

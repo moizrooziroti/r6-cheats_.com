@@ -63,7 +63,7 @@ export const en: Translations = {
           'Extra labels for operators, gadgets, and distances—so you spend less time guessing rotations.',
         bullets: [
           'Tune color, distance, and opacity instead of turning on “everything.”',
-          'Pair with sound—see [forums](/forums/) for clutter threads.',
+          'Pair labels with sound so the overlay stays readable in a gunfight.',
         ],
         tags: ['R6 ESP', 'Siege overlay', 'gadget intel'],
         bento: 'sm:col-span-2 lg:col-span-12 lg:col-start-1 lg:row-start-1',
@@ -76,7 +76,7 @@ export const en: Translations = {
         desc:
           'Smoothing, FOV, bone priority—settings that change how your crosshair moves under stress.',
         bullets: [
-          'Change one slider per session ([settings article](/articles/r6-cheat-settings-explained/)).',
+          'Change one slider per session so you know what actually helped.',
           'Expect missed shots when ping or crosshair height is wrong.',
         ],
         tags: ['R6 aimbot', 'smoothing', 'FOV'],
@@ -89,7 +89,7 @@ export const en: Translations = {
         subtitle: 'Geometry emphasis.',
         desc:
           'Outlines through cover trade GPU work for spatial certainty—thicken on dark sites, thin on bright ones.',
-        bullets: ['See [readability](/articles/r6-wallhack-config-readability/) before maxing lines.'],
+        bullets: ['Keep lines thin enough that you can still read the site.'],
         tags: ['R6 wallhack', 'cover reads', 'verticality'],
         bento: 'sm:col-span-2 lg:col-span-4 lg:col-start-9 lg:row-start-2',
         image: SITE_WEBP.levoVisuals,
@@ -111,7 +111,7 @@ export const en: Translations = {
         subtitle: 'Appeal workflows.',
         desc:
           'Organize evidence, timelines, and exports when access is restricted—no outcome promises.',
-        bullets: ['Explained in [UGC article](/articles/ugc-account-recovery-explained/).'],
+        bullets: ['Use it to organize the case. The platform still decides the result.'],
         tags: ['UGC', 'account recovery', 'appeals'],
         bento: 'sm:col-span-2 lg:col-span-6 lg:col-start-7 lg:row-start-3',
         image: SITE_WEBP.zadeyoMisc,
@@ -122,7 +122,7 @@ export const en: Translations = {
         subtitle: 'Separate hardware path.',
         desc:
           'Memory read at a distance—different cost and cabling than overlays.',
-        bullets: ['Compare [software vs DMA](/articles/software-cheats-vs-cloud-dma-tradeoffs/).'],
+        bullets: ['Buy this when you want a hardware path, not the on-PC cheats loader.'],
         tags: ['Cloud DMA', 'memory read', 'hardware'],
         bento:
           'sm:col-span-2 lg:col-span-4 lg:row-span-2 lg:col-start-9 lg:row-start-3',
@@ -184,7 +184,7 @@ export const en: Translations = {
       {
         step: 'Step 1',
         title: 'Skim articles',
-        desc: 'Start with [how cheats work](/articles/how-rainbow-six-siege-cheats-work/) and the [buying checklist](/articles/buying-r6-cheats-checklist/).',
+        desc: 'Read what ESP, aim assist, and wallhack-style tools actually do, then pick the card that matches.',
       },
       {
         step: 'Step 2',
@@ -297,7 +297,7 @@ export const en: Translations = {
   },
   workflow: {
     eyebrow: 'Workflow',
-    badge: '3 steps',
+    badge: '4 steps',
     titleBefore: 'From reading to',
     titleHighlight: 'checkout',
     subtitle: 'Pause on each step—rushing configuration wastes money and time.',
@@ -410,10 +410,10 @@ export const en: Translations = {
     eyebrow: 'Reader notes',
     title: 'Checkout experiences',
     subtitle:
-      'Short quotes when we have permission to publish them. No aggregate rating until real reviews exist in data/reviews.json.',
+      'Buyer notes show up here only when we have permission to publish them. Until then, the four product pages are the place to buy.',
     emptyTitle: 'No published reviews yet',
     emptyBody:
-      'r6-cheats.com does not invent star ratings. This block stays empty until a real checkout note is added to the reviews file.',
+      'r6-cheats.com does not invent star ratings. Open a product and use Buy when you are ready to check out.',
   },
   footer: {
     tagline: 'Rainbow Six Siege cheats — ESP, aim assist, wallhack-style, HWID, UGC, DMA. Affiliate links.',
