@@ -39,7 +39,7 @@ const purchaseUrl = PRIMARY_BUY_URL;
         {t.nav.map((link) => (
           <a
             href={link.href}
-            class="nav-link inline-flex items-center gap-1.5 text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
+            class="nav-link inline-flex items-center gap-1.5 rounded-full px-2.5 py-1.5 text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
             data-nav-link
             {...(link.scrollTarget ? { 'data-scroll-target': link.scrollTarget } : {})}
           >

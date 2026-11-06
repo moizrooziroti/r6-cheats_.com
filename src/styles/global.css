@@ -245,13 +245,17 @@ html.dark #why-us .why-compare-other-card :hover .icon-app {
   top: 1rem;
 }
 
-/* Navbar (desktop + mobile sheet): primary on hover only — not when .is-active */
+/* Navbar: the open section stays highlighted on desktop and in the mobile menu. */
 a.nav-link[data-nav-link].is-active {
-  color: var(--muted-foreground);
+  color: var(--primary);
+  background: color-mix(in oklch, var(--primary) 16%, transparent);
+  border-radius: 999px;
+  font-weight: 700;
 }
 
 a.nav-link[data-nav-link].is-active:hover {
   color: var(--primary);
+  background: color-mix(in oklch, var(--primary) 22%, transparent);
 }
 
 a.nav-link[data-nav-link] .icon-app {

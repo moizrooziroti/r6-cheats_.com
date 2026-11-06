@@ -3,13 +3,14 @@ import { PRIMARY_BUY_URL } from '../config/checkout';
 ---
 
 <div class="ib" data-instant-buy hidden>
-  <aside class="ib__card" data-instant-buy-panel role="dialog" aria-label="Buy Rainbow Six Siege cheats" hidden>
+  <aside class="ib__card" data-instant-buy-panel role="dialog" aria-label="Rainbow Six Siege cheats offer" hidden>
     <button type="button" class="ib__x" data-instant-buy-close aria-label="Close">
       <svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true">
         <path d="M1 1l10 10M11 1L1 11" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"></path>
       </svg>
     </button>
-    <p class="ib__line">Don't let anyone kill you.</p>
+    <p class="ib__kicker">r6-cheats.com</p>
+    <p class="ib__line">Walk in like the round is already yours.</p>
     <a class="ib__btn" href={PRIMARY_BUY_URL} target="_blank" rel="sponsored noopener noreferrer">
       Buy cheats
       <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true">
@@ -17,10 +18,9 @@ import { PRIMARY_BUY_URL } from '../config/checkout';
       </svg>
     </a>
   </aside>
-  <button type="button" class="ib__tab" data-instant-buy-open aria-expanded="false">
-    Buy cheats
-    <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true">
-      <path d="M3 8h10M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"></path>
+  <button type="button" class="ib__tab" data-instant-buy-open aria-expanded="false" aria-label="Open offer">
+    <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true">
+      <path d="M9 2.5L4.5 7 9 11.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>
     </svg>
   </button>
 </div>
@@ -64,10 +64,11 @@ import { PRIMARY_BUY_URL } from '../config/checkout';
   .ib {
     position: fixed;
     z-index: 80;
-    right: 1rem;
-    bottom: 1.15rem;
+    right: 0;
+    top: 58%;
     display: flex;
-    justify-content: flex-end;
+    align-items: center;
+    gap: 0.55rem;
     pointer-events: none;
   }
   .ib__card,
@@ -78,15 +79,12 @@ import { PRIMARY_BUY_URL } from '../config/checkout';
   }
   .ib__card {
     position: relative;
-    width: 16.5rem;
-    padding: 1.15rem 1rem 1rem;
-    border: 1px solid color-mix(in oklch, var(--primary) 42%, #2a2438);
+    width: 15.5rem;
+    padding: 1rem 0.95rem 0.9rem;
+    border: 1px solid color-mix(in oklch, var(--primary) 38%, #2a2438);
     border-radius: 14px;
-    background:
-      linear-gradient(180deg, color-mix(in oklch, var(--primary) 16%, #14111c) 0%, #100e16 100%);
-    box-shadow:
-      0 18px 40px rgba(0, 0, 0, 0.45),
-      inset 0 1px 0 rgba(255, 255, 255, 0.06);
+    background: linear-gradient(180deg, #1a1526 0%, #100e16 100%);
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.42);
   }
   .ib__card[hidden] {
     display: none;
@@ -94,16 +92,19 @@ import { PRIMARY_BUY_URL } from '../config/checkout';
   .ib.is-open .ib__tab {
     display: none;
   }
+  .ib.is-open {
+    right: 0.85rem;
+  }
   .ib__x {
     position: absolute;
-    top: 0.55rem;
-    right: 0.55rem;
+    top: 0.45rem;
+    right: 0.45rem;
     display: grid;
-    width: 1.6rem;
-    height: 1.6rem;
+    width: 1.5rem;
+    height: 1.5rem;
     place-items: center;
     border: 0;
-    border-radius: 8px;
+    border-radius: 7px;
     background: transparent;
     color: #b7b0c6;
     cursor: pointer;
@@ -112,67 +113,65 @@ import { PRIMARY_BUY_URL } from '../config/checkout';
     background: rgba(255, 255, 255, 0.06);
     color: #fff;
   }
+  .ib__kicker {
+    margin: 0 1.3rem 0.35rem 0;
+    color: #b49bff;
+    font-size: 0.62rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
   .ib__line {
-    margin: 0 1.4rem 0.9rem 0;
+    margin: 0 0 0.85rem;
     color: #fff;
     font-family: Rajdhani, sans-serif;
-    font-size: 1.55rem;
+    font-size: 1.35rem;
     font-weight: 700;
-    line-height: 0.95;
-    letter-spacing: 0.01em;
-    text-transform: uppercase;
+    line-height: 1.05;
   }
   .ib__btn {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 0.45rem;
-    height: 2.75rem;
-    border-radius: 10px;
-    background: linear-gradient(180deg, #b49bff 0%, #7c5ce8 100%);
-    color: #fff;
-    font-size: 0.92rem;
-    font-weight: 800;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    box-shadow: 0 8px 18px rgba(124, 92, 232, 0.45);
-    transition: transform 0.15s ease, filter 0.15s ease;
-  }
-  .ib__btn:hover {
-    transform: translateY(-1px);
-    filter: brightness(1.06);
-  }
-  .ib__tab {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
     gap: 0.4rem;
-    height: 2.75rem;
-    padding: 0 1.05rem 0 1.15rem;
-    border: 0;
-    border-radius: 999px;
+    height: 2.55rem;
+    border-radius: 10px;
     background: linear-gradient(180deg, #b49bff 0%, #7c5ce8 100%);
     color: #fff;
     font-size: 0.84rem;
     font-weight: 800;
     letter-spacing: 0.04em;
     text-transform: uppercase;
+    box-shadow: 0 8px 16px rgba(124, 92, 232, 0.4);
+  }
+  .ib__btn:hover {
+    filter: brightness(1.06);
+  }
+  .ib__tab {
+    display: grid;
+    width: 1.65rem;
+    height: 3.4rem;
+    place-items: center;
+    border: 0;
+    border-radius: 10px 0 0 10px;
+    background: linear-gradient(180deg, #b49bff 0%, #7c5ce8 100%);
+    color: #fff;
     cursor: pointer;
-    box-shadow: 0 10px 24px rgba(124, 92, 232, 0.45);
+    box-shadow: -6px 8px 18px rgba(0, 0, 0, 0.28);
   }
   .ib__tab:hover {
-    filter: brightness(1.06);
+    filter: brightness(1.08);
   }
   @media (max-width: 520px) {
     .ib {
-      right: 0.75rem;
-      bottom: 0.85rem;
+      top: auto;
+      bottom: 1.1rem;
     }
     .ib__card {
-      width: min(16.5rem, calc(100vw - 1.5rem));
+      width: min(15.5rem, calc(100vw - 2.6rem));
     }
     .ib__line {
-      font-size: 1.4rem;
+      font-size: 1.22rem;
     }
   }
 </style>

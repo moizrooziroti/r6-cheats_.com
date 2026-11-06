@@ -50,7 +50,7 @@ export const PAGE_SEO: Record<string, PageSeoEntry> = {
   '/about/': {
     title: 'About r6-cheats.com',
     description:
-      'Editorial Rainbow Six Siege cheats resource — articles, forums, and four affiliate product links.',
+      'r6-cheats.com sells Rainbow Six Siege cheats, an HWID spoofer, UGC recovery, and Cloud DMA, with guides and forums beside each offer.',
   },
   '/support/': {
     title: 'Support | r6-cheats.com',
