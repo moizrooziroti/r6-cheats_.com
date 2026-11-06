@@ -1,0 +1,188 @@
+---
+import '../../styles/forum.css';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import Icon from '../../components/icons/Icon.astro';
+import { forumPosts, getForumPost } from '../../data/forum';
+import { pageTitle } from '../../config/seo';
+import { breadcrumbSchema, discussionForumPostingSchema } from '../../utils/schema';
+import { forumThreadPath, ROUTES } from '../../utils/path';
+import { t } from '../../i18n';
+import { Button } from '@/components/starwind/button';
+
+export function getStaticPaths() {
+  return forumPosts.map((post) => ({ params: { slug: post.slug } }));
+}
+
+const post = getForumPost(Astro.params.slug!);
+if (!post) return Astro.redirect('/forums/');
+
+const path = forumThreadPath(post.slug);
+const breadcrumbs = [
+  { name: 'Home', path: '/' },
+  { name: 'Forums', path: '/forums/' },
+  { name: post.category, path: '/forums/' },
+  { name: post.title, path },
+];
+const relatedPosts = [
+  ...forumPosts.filter((item) => item.slug !== post.slug && item.category === post.category),
+  ...forumPosts.filter((item) => item.slug !== post.slug && item.category !== post.category),
+].slice(0, 3);
+
+const communitySlug = `r6/${post.category.toLowerCase().replaceAll(' ', '')}`;
+
+function replyLabel(author: string): string {
+  if (author === 'R6-Cheats Team') return 'R6-Cheats Team';
+  return author;
+}
+---
+
+<BaseLayout
+  title={pageTitle(post.title)}
+  description={post.excerpt}
+  jsonLd={[
+    discussionForumPostingSchema({
+      name: post.title,
+      text: post.body.join('\n\n'),
+      url: path,
+      author: post.author,
+      comments: post.commentsCount,
+    }),
+    breadcrumbSchema(breadcrumbs),
+  ]}
+>
+  <section class="forum-page py-8 md:py-12">
+    <div class="mx-auto max-w-6xl px-5">
+      <Breadcrumbs items={breadcrumbs} />
+      <div class="forum-layout forum-layout--detail">
+        <main class="forum-main">
+          <article class="forum-detail-card" data-forum-vote data-post-slug={post.slug} data-upvotes={post.upvotes}>
+            <div class="forum-vote forum-vote--detail" aria-label="Thread voting">
+              <button class="forum-vote__up" type="button" data-vote-up aria-label="Upvote this thread"
+                ><Icon name="chevronDown" size={17} /></button
+              ><strong data-vote-count>{post.upvotes}</strong><button type="button" disabled aria-label="Downvoting is unavailable"
+                ><Icon name="chevronDown" size={17} /></button
+              >
+            </div>
+            <div class="forum-detail-content">
+              <div class="forum-post-meta">
+                <span class={`forum-community-avatar tone-${post.categoryTone}`}><Icon name="users" size={15} /></span
+                ><a href="/forums/" class="forum-community-name">{communitySlug}</a><span>·</span><span
+                  ><Icon name="userRound" size={13} /> {t.site.name}</span
+                ><span>{post.commentsCount} replies</span>
+              </div>
+              <h1>{post.title}</h1>
+              {post.flair && <span class={`forum-flair tone-${post.categoryTone}`}>{post.flair}</span>}
+              <div class="forum-detail-copy">{post.body.map((paragraph) => <p>{paragraph}</p>)}</div>
+              {
+                post.relatedArticle && (
+                  <p class="forum-source forum-source--detail">
+                    Related article: <a href={post.relatedArticle.path}>{post.relatedArticle.title}</a>
+                  </p>
+                )
+              }
+              <div class="forum-post-actions forum-post-actions--detail">
+                <a href="#comments"><Icon name="messageCircle" size={16} /> {post.commentsCount} replies</a>
+                {
+                  post.relatedArticle && (
+                    <a href={post.relatedArticle.path}><Icon name="navBlog" size={15} /> Open article</a>
+                  )
+                }
+                <Button as="a" href={post.productHref} variant="outline" size="sm" class="forum-product-cta">
+                  Linked product
+                </Button>
+              </div>
+              <div class="forum-login-prompt">
+                <span class="forum-user-dot">i</span><span>Read-only preview</span><span>Posting is unavailable on this site</span>
+              </div>
+              <section class="forum-comments" id="comments" aria-labelledby="comments-title">
+                <div class="forum-comments__heading">
+                  <h2 id="comments-title">
+                    Replies <span>{post.commentsCount}</span>
+                  </h2>
+                  <span>Thread</span>
+                </div>
+                {post.comments.map((comment) => (
+                  <article class="forum-comment">
+                    <div class="forum-comment__rail">
+                      <span class="forum-comment__avatar"><Icon name="userRound" size={14} /></span><span class="forum-comment__line"
+                      ></span>
+                    </div>
+                    <div class="forum-comment__body">
+                      <div class="forum-comment__meta">
+                        <b>{replyLabel(comment.author)}</b><span>·</span><span>{comment.age}</span>
+                      </div>
+                      <p>{comment.body}</p>
+                      {comment.replies?.map((reply) => (
+                        <div class="forum-comment forum-comment--reply">
+                          <div class="forum-comment__rail">
+                            <span class="forum-comment__avatar">{reply.author.slice(0, 1).toUpperCase()}</span>
+                          </div>
+                          <div class="forum-comment__body">
+                            <div class="forum-comment__meta">
+                              <b>{replyLabel(reply.author)}</b><span>·</span><span>{reply.age}</span>
+                            </div>
+                            <p>{reply.body}</p>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </article>
+                ))}
+              </section>
+            </div>
+          </article>
+        </main>
+        <aside class="forum-sidebar">
+          <section class="forum-side-card forum-about">
+            <div class="forum-side-card__banner"></div>
+            <div class="forum-about__content">
+              <div class="forum-about__title">
+                <span class={`forum-community-avatar tone-${post.categoryTone}`}>r6</span><h2>{communitySlug}</h2>
+              </div>
+              <p>Threads pair with our articles and the four affiliate product pages.</p>
+              <div class="forum-stats">
+                <span
+                  ><b>{forumPosts.length}</b> threads</span
+                ><span
+                  ><b>{forumPosts.filter((item) => item.category === post.category).length}</b> in this topic</span
+                >
+              </div>
+              <a class="forum-join" href="/forums/">Browse forums</a>
+            </div>
+          </section>
+          <section class="forum-side-card forum-related-card" aria-labelledby="forum-related-title">
+            <h2 class="forum-side-heading" id="forum-related-title">More threads</h2>
+            <ul class="forum-related-list">
+              {relatedPosts.map((item) => (
+                <li>
+                  <a href={forumThreadPath(item.slug)}>
+                    <span class="forum-related-list__category">{item.category}</span>
+                    <b>{item.title}</b>
+                    <span class="forum-related-list__meta">{item.commentsCount} replies <Icon name="arrowRight" size={14} /></span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+            <a class="forum-related-card__all" href="/forums/">View all threads <Icon name="arrowRight" size={14} /></a>
+          </section>
+          <section class="forum-side-card">
+            <h2 class="forum-side-heading">Product</h2>
+            <p class="text-sm text-muted-foreground">This thread references one offer on the catalog.</p>
+            <Button as="a" href={post.productHref} variant="primary" class="mt-3 w-full">
+              Open product page
+              <Icon name="arrowRight" size={14} />
+            </Button>
+            <Button as="a" href={ROUTES.articles} variant="outline" class="mt-2 w-full">
+              Articles
+            </Button>
+          </section>
+        </aside>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+<script>
+  import { initForumVotes } from '../../scripts/forum-votes.ts';
+  initForumVotes();
+</script>

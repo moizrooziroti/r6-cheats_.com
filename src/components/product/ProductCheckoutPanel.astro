@@ -1,0 +1,56 @@
+---
+import type { ProductPage } from '../../data/products';
+import { formatPlanPrice, getProductPlans } from '../../data/productPricing';
+import Icon from '../icons/Icon.astro';
+import ProductIconWell from './ProductIconWell.astro';
+import { Button } from '@/components/starwind/button';
+
+interface Props {
+  product: ProductPage;
+}
+
+const { product } = Astro.props;
+const plans = getProductPlans(product.slug);
+const defaultPlan = plans[0]!;
+const buyRel = 'sponsored noopener noreferrer';
+---
+
+<aside
+  class="product-checkout text-left lg:sticky lg:top-24"
+  aria-labelledby={`checkout-${product.slug}`}
+>
+  <div class="overflow-hidden rounded-2xl border border-primary/35 bg-card shadow-md ring-1 ring-primary/15">
+    <div class="card-title-band flex items-center justify-start gap-3 px-5 py-4 text-left">
+      <ProductIconWell name="acqPackage" iconSize={20} class="bg-primary/15" />
+      <div class="min-w-0 text-left">
+        <p class="text-xs font-medium uppercase tracking-wider text-muted-foreground">Purchase</p>
+        <h2 id={`checkout-${product.slug}`} class="text-base font-semibold leading-snug">
+          Affiliate checkout
+        </h2>
+      </div>
+    </div>
+
+    <div class="space-y-5 px-5 pb-5 pt-2">
+      <div class="rounded-xl border border-border bg-background p-4">
+        <p class="text-xs font-medium uppercase tracking-wider text-muted-foreground">Price</p>
+        <p class="mt-1 font-[family-name:var(--font-heading)] text-2xl font-bold tabular-nums text-primary">
+          {formatPlanPrice(defaultPlan.priceUsd)}
+        </p>
+        <p class="mt-1 text-xs text-muted-foreground">{defaultPlan.priceNote}</p>
+      </div>
+
+      <Button
+        as="a"
+        href={product.buyUrl}
+        target="_blank"
+        rel={buyRel}
+        variant="primary"
+        size="lg"
+        class="w-full rounded-xl"
+      >
+        Buy now
+        <Icon name="arrowRight" size={17} />
+      </Button>
+    </div>
+  </div>
+</aside>

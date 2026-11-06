@@ -1,0 +1,51 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getAllFaqs } from '../data/faq';
+import { resolvePageSeo } from '../config/seo';
+import { breadcrumbSchema, faqPageSchema, webPageSchema } from '../utils/schema';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import SiteFaqSection from '../components/SiteFaqSection.astro';
+import SectionHeader from '../components/SectionHeader.astro';
+import { t } from '../i18n';
+
+const seo = resolvePageSeo('/faq/');
+const breadcrumbs = [
+  { name: 'Home', path: '/' },
+  { name: 'FAQ', path: '/faq/' },
+];
+
+const faqs = getAllFaqs();
+const pageTitleFaq = `FAQ | ${t.site.name}`;
+const pageDesc =
+  'Answers about Rainbow Six Siege cheat categories, affiliate Buy links, ESP and aim vocabulary, HWID spoofer scope, UGC recovery, and Cloud DMA.';
+---
+
+<BaseLayout
+  title={seo.title}
+  description={seo.description}
+  jsonLd={[
+    webPageSchema({
+      name: pageTitleFaq,
+      description: pageDesc,
+      url: '/faq/',
+    }),
+    faqPageSchema(faqs.map((f, i) => ({ num: String(i + 1).padStart(2, '0'), q: f.q, a: f.a.replace(/<[^>]+>/g, '') }))),
+    breadcrumbSchema(breadcrumbs),
+  ]}
+>
+  <section class="border-b border-border bg-muted/10 py-8 md:py-12">
+    <div class="mx-auto max-w-6xl px-5">
+      <Breadcrumbs items={breadcrumbs} />
+      <div class="mt-6">
+        <SectionHeader
+          eyebrow={t.faq.eyebrow}
+          title={t.faq.title}
+          desc={t.faq.subtitle}
+          titleId="faq-page-title"
+        />
+      </div>
+    </div>
+  </section>
+
+  <SiteFaqSection items={faqs} variant="full" titleId="faq-page-list" />
+</BaseLayout>

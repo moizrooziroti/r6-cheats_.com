@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://r6-cheats.com/sitemap.xml
+
+# RSS: https://r6-cheats.com/rss.xml

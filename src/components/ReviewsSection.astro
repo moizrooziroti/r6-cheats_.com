@@ -1,0 +1,94 @@
+---
+import type { SiteReview } from '../data/reviews';
+import { reviews } from '../data/reviews';
+import SectionHeader from './SectionHeader.astro';
+import { t } from '../i18n';
+import { Card, CardContent } from '@/components/starwind/card';
+import { Button } from '@/components/starwind/button';
+import Icon from './icons/Icon.astro';
+
+const PAGE_SIZE = 6;
+const pages: SiteReview[][] = [];
+for (let i = 0; i < reviews.length; i += PAGE_SIZE) {
+  pages.push(reviews.slice(i, i + PAGE_SIZE));
+}
+const totalPages = Math.max(1, pages.length);
+---
+
+<section id="reviews" class="border-t border-border bg-muted/15 py-16 md:py-24" aria-labelledby="reviews-title">
+  <div class="mx-auto max-w-6xl px-5">
+    <SectionHeader
+      eyebrow={t.reviews.eyebrow}
+      title={t.reviews.title}
+      desc={t.reviews.subtitle}
+      titleId="reviews-title"
+    />
+
+    {
+      reviews.length === 0 ? (
+        <Card class="mt-10 border-dashed">
+          <CardContent class="py-12 text-center">
+            <Icon name="messageCircle" size={28} class="mx-auto text-muted-foreground" aria-hidden="true" />
+            <p class="mt-4 text-lg font-semibold text-foreground">{t.reviews.emptyTitle}</p>
+            <p class="mx-auto mt-2 max-w-md text-sm text-muted-foreground">{t.reviews.emptyBody}</p>
+          </CardContent>
+        </Card>
+      ) : (
+        <>
+          <div class="reviews-pages mt-10">
+            {pages.map((chunk, pageIndex) => (
+              <div
+                class:list={['grid gap-6 sm:grid-cols-2 lg:grid-cols-3', pageIndex > 0 && 'hidden']}
+                data-reviews-chunk={pageIndex}
+              >
+                {chunk.map((r) => (
+                  <Card class="gap-0 overflow-hidden py-0">
+                    <CardContent class="space-y-3 py-6">
+                      <p class="text-sm leading-relaxed text-foreground">&ldquo;{r.quote}&rdquo;</p>
+                      <p class="text-xs font-medium text-muted-foreground">— {r.name}</p>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+            ))}
+          </div>
+          {totalPages > 1 && (
+            <div class="mt-8 flex flex-wrap items-center justify-center gap-3">
+              <Button type="button" variant="outline" size="sm" data-reviews-prev disabled>
+                Previous
+              </Button>
+              <span class="text-sm text-muted-foreground" data-reviews-status>
+                Page 1 of {totalPages}
+              </span>
+              <Button type="button" variant="outline" size="sm" data-reviews-next disabled={totalPages <= 1 ? true : undefined}>
+                Next
+              </Button>
+            </div>
+          )}
+        </>
+      )
+    }
+  </div>
+</section>
+
+{
+  totalPages > 1 && (
+    <script define:vars={{ totalPages: totalPages }}>
+      const chunks = [...document.querySelectorAll('[data-reviews-chunk]')];
+      const prev = document.querySelector('[data-reviews-prev]');
+      const next = document.querySelector('[data-reviews-next]');
+      const status = document.querySelector('[data-reviews-status]');
+      let page = 0;
+      function show(p) {
+        page = Math.min(Math.max(0, p), totalPages - 1);
+        chunks.forEach((el, i) => el.classList.toggle('hidden', i !== page));
+        if (status) status.textContent = `Page ${page + 1} of ${totalPages}`;
+        if (prev) prev.disabled = page <= 0;
+        if (next) next.disabled = page >= totalPages - 1;
+      }
+      prev?.addEventListener('click', () => show(page - 1));
+      next?.addEventListener('click', () => show(page + 1));
+      show(0);
+    </script>
+  )
+}
