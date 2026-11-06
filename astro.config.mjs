@@ -10,8 +10,6 @@ export default defineConfig({
     // One entry per path — Astro treats /x and /x/ as the same static route with trailingSlash: 'always'.
     '/blog/': '/articles/',
     '/forum/': '/forums/',
-    '/products/dota-2-cheats/': '/products/',
-    '/products/dota-2-cheats/utilities/': '/products/',
     '/contact/': '/support/',
   },
   compressHTML: true,

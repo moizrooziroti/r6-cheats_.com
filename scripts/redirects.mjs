@@ -14,10 +14,6 @@ export const PATH_REDIRECTS = new Map([
   ['/affiliate-disclosure', '/affiliate-disclosure/'],
   ['/cheats', '/products/'],
   ['/cheats/', '/products/'],
-  ['/products/dota-2-cheats', '/products/'],
-  ['/products/dota-2-cheats/', '/products/'],
-  ['/products/dota-2-cheats/utilities', '/products/'],
-  ['/products/dota-2-cheats/utilities/', '/products/'],
 ]);
 
 /** Paths that should not receive a forced trailing slash. */

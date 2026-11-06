@@ -97,7 +97,7 @@ export const productAcquisitionStepIcons: IconName[] = [
 /** Product detail requirement tiles — prefer compat-style icons where mapped */
 export const productRequirementIcons: Partial<Record<IconName, IconName>> = {
   reqWindows: 'compatWindows',
-  reqSteam: 'compatSteam',
+  reqClient: 'compatClient',
   reqSettings: 'compatPackage',
   reqWifi: 'compatWifi',
   reqCpu: 'compatMonitor',
@@ -115,7 +115,7 @@ export function requirementDisplayIcon(icon: IconName): IconName {
 export const compatibilityIcons: IconName[] = [
   'compatWindows',
   'compatPackage',
-  'compatSteam',
+  'compatClient',
   'compatMonitor',
   'compatRefresh',
   'compatWifi',

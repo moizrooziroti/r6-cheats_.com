@@ -1,11 +1,11 @@
-# Search Console workflow (dotacheats.com)
+# Search Console workflow (r6-cheats.com)
 
 You verify the domain at your DNS provider—no HTML meta tags in the repo.
 
 ## Setup (once)
 
-1. Open [Google Search Console](https://search.google.com/search-console) and add the **domain** property for `dotacheats.com` if it is not already there.
-2. Under **Sitemaps**, submit: `https://dotacheats.com/sitemap.xml`
+1. Open [Google Search Console](https://search.google.com/search-console) and add the **domain** property for `r6-cheats.com` if it is not already there.
+2. Under **Sitemaps**, submit: `https://r6-cheats.com/sitemap.xml`
 3. Repeat in [Bing Webmaster Tools](https://www.bing.com/webmasters) if you use Bing.
 
 ## Monthly tune (15 minutes)
@@ -20,10 +20,12 @@ You verify the domain at your DNS provider—no HTML meta tags in the repo.
 
 | Common query intent | Edit path in `pageSeo.ts` |
 | ------------------- | ------------------------- |
-| dota 2 cheats (broad) | `/` |
-| lite / pro / elite | `/cheats/compare/`, `/cheats/lite/`, etc. |
-| map hack, scripts | `/cheats/pro/`, blog posts (titles set per article) |
-| hwid, skin changer | `/products/dota-2-cheats/utilities/` |
-| purchase / refund | `/terms/`, `/contact/` |
+| rainbow six siege cheats | `/` |
+| r6 esp, aimbot, wallhack | `/products/rainbow-six-siege-cheats/` |
+| hwid spoofer | `/products/rainbow-six-siege-spoofer/` |
+| ugc account recovery | `/products/ugc-account-recovery/` |
+| cloud dma | `/products/cloud-dma/` |
+| guides | `/articles/` |
+| forums | `/forums/` |
 
-Product and blog article pages still use their own titles from content; add entries to `PAGE_SEO` only when you want a fixed override for a specific pathname.
+Product and article pages still use their own titles from content; add entries to `PAGE_SEO` only when you want a fixed override for a specific pathname.
